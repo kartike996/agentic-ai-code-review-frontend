@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Editor from "@monaco-editor/react";
 import "./App.css";
 
 function App() {
@@ -82,11 +83,27 @@ function App() {
         Multi-Agent AI Powered Secure Code Review Platform
       </p>
 
-      <textarea
-        placeholder="Paste Java code here..."
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-      />
+      <div className="editor-container">
+
+        <Editor
+          height="400px"
+          defaultLanguage="java"
+          theme="vs-dark"
+          value={code}
+          onChange={(value) => setCode(value || "")}
+          options={{
+            fontSize: 15,
+            minimap: { enabled: false },
+            automaticLayout: true,
+            scrollBeyondLastLine: false,
+            roundedSelection: true,
+            padding: {
+              top: 15
+            }
+          }}
+        />
+
+      </div>
 
       <div className="button-container">
 
