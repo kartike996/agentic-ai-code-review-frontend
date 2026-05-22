@@ -37,6 +37,27 @@ function App() {
     setLoading(false);
   };
 
+  const analyzeLatestCommit = async () => {
+
+    setLoading(true);
+
+    try {
+
+      const response = await axios.get(
+        "http://localhost:8080/api/review/latest-commit"
+      );
+
+      setReview(response.data);
+
+    } catch (error) {
+
+      console.error(error);
+      alert("Error analyzing latest commit.");
+    }
+
+    setLoading(false);
+  };
+
   const loadSampleCode = () => {
 
     const sample = `public class Test {
@@ -78,6 +99,13 @@ function App() {
           style={{ marginLeft: "15px" }}
         >
           Load Sample Code
+        </button>
+
+        <button
+          onClick={analyzeLatestCommit}
+          style={{ marginLeft: "15px" }}
+        >
+          Analyze Latest Commit
         </button>
 
       </div>
