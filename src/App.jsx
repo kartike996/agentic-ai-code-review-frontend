@@ -113,14 +113,12 @@ function App() {
 
         <button
           onClick={loadSampleCode}
-          style={{ marginLeft: "15px" }}
         >
           Load Sample Code
         </button>
 
         <button
           onClick={analyzeLatestCommit}
-          style={{ marginLeft: "15px" }}
         >
           Analyze Latest Commit
         </button>
@@ -135,29 +133,73 @@ function App() {
 
       {review && (
 
-        <div className="reviews">
+        <>
 
-          <div className="card">
-            <h2>Quality Review</h2>
-            <pre>{review.qualityReview}</pre>
+          {review.gitCommitInfo && (
+
+            <div className="commit-card">
+
+              <h2>Latest Commit Details</h2>
+
+              <p>
+                <strong>Commit ID:</strong>
+                {" "}
+                {review.gitCommitInfo.commitId}
+              </p>
+
+              <p>
+                <strong>Commit Message:</strong>
+                {" "}
+                {review.gitCommitInfo.commitMessage}
+              </p>
+
+              <div className="files-section">
+
+                <strong>Changed Files:</strong>
+
+                <ul>
+
+                  {review.gitCommitInfo.changedFiles.map(
+                    (file, index) => (
+
+                      <li key={index}>
+                        {file}
+                      </li>
+                    )
+                  )}
+
+                </ul>
+
+              </div>
+
+            </div>
+          )}
+
+          <div className="reviews">
+
+            <div className="card">
+              <h2>Quality Review</h2>
+              <pre>{review.qualityReview}</pre>
+            </div>
+
+            <div className="card">
+              <h2>Security Review</h2>
+              <pre>{review.securityReview}</pre>
+            </div>
+
+            <div className="card">
+              <h2>Maintainability Review</h2>
+              <pre>{review.maintainabilityReview}</pre>
+            </div>
+
+            <div className="card overall-card">
+              <h2>Overall Assessment</h2>
+              <pre>{review.overallReview}</pre>
+            </div>
+
           </div>
 
-          <div className="card">
-            <h2>Security Review</h2>
-            <pre>{review.securityReview}</pre>
-          </div>
-
-          <div className="card">
-            <h2>Maintainability Review</h2>
-            <pre>{review.maintainabilityReview}</pre>
-          </div>
-
-          <div className="card overall-card">
-            <h2>Overall Assessment</h2>
-            <pre>{review.overallReview}</pre>
-          </div>
-
-        </div>
+        </>
       )}
 
     </div>
